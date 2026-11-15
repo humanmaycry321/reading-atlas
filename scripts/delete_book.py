@@ -1,12 +1,12 @@
 """Delete a book and its generated pages from every published version."""
 import argparse,json,re
 from pathlib import Path
-SLUGS={'choices':'养育的选择','wholebrain':'全脑教养法','stepdad':'The Smart Stepdad','world-order':'世界秩序','missing':'影子里的中国'}
+SLUGS={'choices':'养育的选择','wholebrain':'全脑教养法','stepdad':'The Smart Stepdad','world-order':'世界秩序','missing':'影子里的中国','on-china':'论中国','sapiens':'人类简史','homo-deus':'未来简史','21-lessons':'今日简史'}
 def remove(root,slug):
  if slug not in SLUGS:raise ValueError('Unknown book')
  removed=[]
  for f in list(root.rglob('*')):
-  if f.is_file() and (f.name==slug+'.html' or f.name.startswith(slug+'-')):
+  if f.is_file() and (f.name==slug+'.html' or f.name.startswith(slug+'-') or (f.parent.name=='covers' and f.stem==slug)):
    removed.append(str(f.relative_to(root)));f.unlink()
  for f in root.rglob('catalog*.js'):
   s=f.read_text();m=re.fullmatch(r'\s*const books\s*=\s*(\[.*\]);?\s*',s,re.S)

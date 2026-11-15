@@ -12,6 +12,10 @@ on:
           - stepdad
           - world-order
           - missing
+          - on-china
+          - sapiens
+          - homo-deus
+          - 21-lessons
       confirmation:
         description: 再次输入所选书籍ID确认删除
         required: true
